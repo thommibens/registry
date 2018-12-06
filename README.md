@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/thommibens/registry.svg?branch=master)](https://travis-ci.org/thommibens/registry)
 #  Registry
 A simple Spring Boot App, made to try Conteinerized deploy
 
