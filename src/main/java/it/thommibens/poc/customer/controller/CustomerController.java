@@ -20,7 +20,7 @@ import it.thommibens.poc.customer.manager.CustomerManager;
 public class CustomerController {
 
     @Autowired
-    CustomerManager customerManager;
+    private CustomerManager customerManager;
 
     @GetMapping({ "", "search" })
     public List<Customer> get() {
@@ -28,7 +28,7 @@ public class CustomerController {
     }
 
     @GetMapping("{id}")
-    public Customer get(@PathVariable("id") String id) {
+    public final Customer get(@PathVariable("id") String id) {
         return customerManager.get(id);
     }
 
