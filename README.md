@@ -64,3 +64,5 @@ You can check the application by navigating to the following urls:
     http:\\{hostname}:{port}/v1/customer/search?name={word to check}
     ```
     > Example `http:\\localhost:8080/v1/customer/search?name=phoebe`
+---
+    hi
