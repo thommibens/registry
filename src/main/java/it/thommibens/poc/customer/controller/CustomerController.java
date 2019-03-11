@@ -49,6 +49,7 @@ public class CustomerController {
     public List<Customer> searchNameSurname(@RequestParam String name, @RequestParam String surname) {
         return filteredCustomer((customer) -> containsIgnoreCase(customer.getName(), name),
                 (customer) -> containsIgnoreCase(customer.getSurname(), surname));
+        // hi
     }
 
     private List<Customer> filteredCustomer(Predicate<? super Customer>... filters) {
