@@ -14,10 +14,9 @@ import it.thommibens.poc.customer.manager.CustomersMock;
 @Configuration
 public class CustomerDevConfiguration {
 
-	@Bean
-	CustomerManager customerManager() throws JsonParseException, JsonMappingException, IOException {
-		return new CustomersMock();
-	}
-	
-	
+    @Bean
+    CustomerManager customerManager() throws JsonParseException, JsonMappingException, IOException {
+        return new CustomersMock();
+    }
+
 }

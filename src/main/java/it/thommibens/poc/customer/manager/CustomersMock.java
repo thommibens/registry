@@ -17,40 +17,38 @@ import it.thommibens.poc.customer.Customer;
 
 public class CustomersMock implements CustomerManager {
 
-	private final CustomerList customers;
-	private static final String mock_file = "/mock/customer.json";
-	
-	public CustomersMock() throws JsonParseException, JsonMappingException, IOException {
-		ObjectMapper mapper = new ObjectMapper();
-		this.customers = mapper.readValue(CustomersMock.class.getResourceAsStream(mock_file), CustomerList.class);
-	}
-	
-	@Override
-	public Customer get(String id) {
-		return customers.copiedStream()
-		.filter((customer) -> customer.get_id().equals(id))
-		.findFirst()
-		.orElseThrow(()->{
-			return new ResponseStatusException(HttpStatus.NOT_FOUND,String.format("No Customer found for id: %s", id));
-		});
-	}
+    private final CustomerList customers;
+    private static final String mock_file = "/mock/customer.json";
 
-	@Override
-	public List<Customer> get() {
-		return customers.copiedStream()
-				.collect(Collectors.toCollection(CustomerList::new));
-	}
+    public CustomersMock() throws JsonParseException, JsonMappingException, IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        this.customers = mapper.readValue(CustomersMock.class.getResourceAsStream(mock_file), CustomerList.class);
+    }
+
+    @Override
+    public Customer get(String id) {
+        return customers.copiedStream().filter((customer) -> customer.get_id().equals(id)).findFirst()
+                .orElseThrow(() -> {
+                    return new ResponseStatusException(HttpStatus.NOT_FOUND,
+                            String.format("No Customer found for id: %s", id));
+                });
+    }
+
+    @Override
+    public List<Customer> get() {
+        return customers.copiedStream().collect(Collectors.toCollection(CustomerList::new));
+    }
 
 }
 
-class CustomerList extends LinkedList<Customer>{
-	
-	private static final long serialVersionUID = 1L;
+class CustomerList extends LinkedList<Customer> {
 
-	//Deep copy 
-	public Stream<Customer> copiedStream() {
-		return parallelStream()
-//		.map((customer) -> customer.clone());
-				;
-	}
+    private static final long serialVersionUID = 1L;
+
+    // Deep copy
+    public Stream<Customer> copiedStream() {
+        return parallelStream()
+        // .map((customer) -> customer.clone());
+        ;
+    }
 }
